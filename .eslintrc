@@ -9,6 +9,48 @@
     "import/no-extraneous-dependencies": 0,
     "comma-dangle": 0,
     "jsx-quotes": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "no-underscore-dangle": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": 0,
+    "react/sort-comp": [2, {         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md
+      "order": [
+        "lifecycle",
+        "everything-else",
+        "renderstuff"
+      ],
+      "groups": {
+        "lifecycle": [
+          "displayName",
+          "fragments",
+          "panelSettings",
+          "propTypes",
+          "contextTypes",
+          "childContextTypes",
+          "mixins",
+          "statics",
+          "defaultProps",
+          "defaultChildren",
+          "propsSchema",
+          "settings",
+          "style",
+          "constructor",
+          "getDefaultProps",
+          "getInitState",
+          "init",
+          "getChildContext",
+          "componentWillMount",
+          "componentDidMount",
+          "componentWillReceiveProps",
+          "shouldComponentUpdate",
+          "componentWillUpdate",
+          "componentDidUpdate",
+          "componentWillUnmount"
+        ],
+        "renderstuff": [
+          "render",
+          "/^render.+$/"
+        ]
+      }
+    }]
   }
 }
