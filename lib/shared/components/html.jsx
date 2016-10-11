@@ -9,14 +9,16 @@ export default class Html extends React.Component {
 
   render () {
     return (
-      <html>
+      <html lang='en'>
         <head>
           {this.renderHeader()}
           <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         </head>
         <body>
           <div id='view' dangerouslySetInnerHTML={{__html: this.props.body}} />
-          <script dangerouslySetInnerHTML={{__html: `window.__initialState = ${this.props.props};`}} />
+          <script
+            dangerouslySetInnerHTML={{__html: `window.__initialState = ${this.props.props};`}}
+          />
           {this.renderFooter()}
         </body>
       </html>
