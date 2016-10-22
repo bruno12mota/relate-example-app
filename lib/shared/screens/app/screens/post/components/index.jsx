@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import Button from 'components/button';
 import Editor from 'components/editor';
+import bind from 'decorators/bind';
 import cx from 'classnames';
 import styles from './index.less';
 
@@ -11,9 +12,14 @@ export default class Post extends Component {
     post: PropTypes.object,
     isNew: PropTypes.bool,
     isEdit: PropTypes.bool,
-    editorState: PropTypes.any,
-    onContentChange: PropTypes.func.isRequired
+    changeTitle: PropTypes.func.isRequired,
+    changeContent: PropTypes.func.isRequired
   };
+
+  @bind
+  onChangeTitle (event) {
+    this.props.changeTitle(event.target.value);
+  }
 
   render () {
     const {isEdit, isNew, id} = this.props;
@@ -38,14 +44,18 @@ export default class Post extends Component {
     let result;
 
     if (isEdit) {
-      const {editorState, onContentChange} = this.props;
+      const {changeContent} = this.props;
 
       result = (
         <div>
-          <input value={post.title} />
+          <input
+            className={styles.input}
+            value={post.title}
+            onChange={this.onChangeTitle}
+          />
           <Editor
-            value={editorState}
-            onChange={onContentChange}
+            value={post.content}
+            onChange={changeContent}
           />
         </div>
       );
