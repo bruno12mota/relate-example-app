@@ -6,7 +6,9 @@ var autoprefixer = require('autoprefixer');
 var optimize = webpack.optimize;
 
 var webpackConfig = module.exports = {
-  entry: './lib/client/index.js',
+  entry: {
+    index: ['./lib/client/index.js']
+  },
   output: {
     path: './public/assets',
     filename: '[name].js',

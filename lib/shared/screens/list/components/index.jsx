@@ -24,7 +24,12 @@ export default class List extends Component {
       result = this.renderContent();
     }
 
-    return result;
+    return (
+      <div>
+        <div>My Blog</div>
+        {result}
+      </div>
+    );
   }
 
   renderLoading () {
