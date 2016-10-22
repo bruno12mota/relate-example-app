@@ -1,0 +1,36 @@
+@import '~styles/colors.less';
+@import '~styles/sizes.less';
+
+.root {
+  position: fixed;
+  top: 0;left: 0; bottom: 0;
+
+  width: @menuWidth;
+  border-right: 1px solid @borders;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 70px;
+  padding: 15px 10px;
+}
+
+.addButton {
+  display: block;
+  text-align: center;
+  border: 1px solid @primary;
+  text-decoration: none;
+  color: @primary;
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 300;
+
+  &:hover {
+    background-color: @primary;
+    color: #ffffff;
+  }
+}

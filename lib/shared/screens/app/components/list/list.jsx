@@ -1,6 +1,8 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 import Entry from './entry';
+import {Link} from 'react-router';
+import styles from './list.less';
 
 export default class List extends Component {
   static fragments = {
@@ -9,7 +11,7 @@ export default class List extends Component {
 
   static propTypes = {
     posts: PropTypes.array,
-    loading: PropTypes.bool
+    loading: PropTypes.bool.isRequired
   };
 
   render () {
@@ -25,9 +27,13 @@ export default class List extends Component {
     }
 
     return (
-      <div>
-        <div>My Blog</div>
+      <div className={styles.root}>
         {result}
+        <div className={styles.footer}>
+          <Link to='/new' className={styles.addButton}>
+            Create new post
+          </Link>
+        </div>
       </div>
     );
   }
