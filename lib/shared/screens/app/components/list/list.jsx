@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
+import Button from 'components/button';
 import Entry from './entry';
-import {Link} from 'react-router';
 import styles from './list.less';
 
 export default class List extends Component {
@@ -30,9 +30,9 @@ export default class List extends Component {
       <div className={styles.root}>
         {result}
         <div className={styles.footer}>
-          <Link to='/new' className={styles.addButton}>
+          <Button url='/new' primary block>
             Create new post
-          </Link>
+          </Button>
         </div>
       </div>
     );
