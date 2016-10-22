@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import StyleButton from './style-button';
+import styles from './inline-styles.less';
 
 const INLINE_STYLES = [
   {label: 'Bold', style: 'BOLD'},
@@ -20,7 +21,7 @@ export default class InlineStyles extends Component {
     const currentStyle = editorState.getCurrentInlineStyle();
 
     return (
-      <div className="RichEditor-controls">
+      <div className={styles.root}>
         {INLINE_STYLES.map(type =>
           <StyleButton
             key={type.label}

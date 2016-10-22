@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import StyleButton from './style-button';
+import styles from './block-styles.less';
 
 const BLOCK_TYPES = [
   {label: 'H1', style: 'header-one'},
@@ -31,7 +32,7 @@ export default class BlockStyles extends Component {
       .getType();
 
     return (
-      <div className="RichEditor-controls">
+      <div className={styles.root}>
         {BLOCK_TYPES.map((type) =>
           <StyleButton
             key={type.label}

@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import bind from 'decorators/bind';
 import cx from 'classnames';
+import styles from './style-button.less';
 
 export default class StyleButton extends Component {
   static propTypes = {
@@ -19,7 +20,7 @@ export default class StyleButton extends Component {
 
   render () {
     const {active, label} = this.props;
-    const className = cx('RichEditor-styleButton', active && ' RichEditor-activeButton');
+    const className = cx(styles.root, active && styles.active);
 
     return (
       <span className={className} onMouseDown={this.onToggle}>
