@@ -14,7 +14,8 @@ export default class Post extends Component {
     isNew: PropTypes.bool,
     isEdit: PropTypes.bool,
     changeTitle: PropTypes.func.isRequired,
-    changeContent: PropTypes.func.isRequired
+    changeContent: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
   };
 
   @bind
@@ -23,7 +24,7 @@ export default class Post extends Component {
   }
 
   render () {
-    const {isEdit, isNew, id} = this.props;
+    const {isEdit, isNew, id, onSubmit} = this.props;
 
     return (
       <div className={cx(styles.root, isEdit && styles.editing)}>
@@ -32,7 +33,7 @@ export default class Post extends Component {
           <Button cancel margins url={isNew ? '/' : `/${id}`}>
             {isNew ? 'Cancel new' : 'Cancel edit'}
           </Button>
-          <Button primary margins>
+          <Button primary margins onClick={onSubmit}>
             {isNew ? 'Create post' : 'Save post'}
           </Button>
         </div>
