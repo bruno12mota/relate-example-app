@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import Button from 'components/button';
 import Editor from 'components/editor';
+import Typography from 'components/typography';
 import bind from 'decorators/bind';
 import cx from 'classnames';
 import styles from './index.less';
@@ -29,7 +30,7 @@ export default class Post extends Component {
         {this.renderContent()}
         <div className={styles.footer}>
           <Button cancel margins url={isNew ? '/' : `/${id}`}>
-            Cancel edit
+            {isNew ? 'Cancel new' : 'Cancel edit'}
           </Button>
           <Button primary margins>
             {isNew ? 'Create post' : 'Save post'}
@@ -61,10 +62,10 @@ export default class Post extends Component {
       );
     } else {
       result = (
-        <div>
+        <Typography>
           <h1>{post.title}</h1>
           <div>{post.content}</div>
-        </div>
+        </Typography>
       );
     }
 
