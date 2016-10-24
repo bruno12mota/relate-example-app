@@ -3,7 +3,10 @@ import React, {Component, PropTypes} from 'react';
 
 import BlockStyles from './block-styles';
 import InlineStyles from './inline-styles';
+import Typography from 'components/typography';
 import bind from 'decorators/bind';
+import cx from 'classnames';
+import styles from './index.less';
 
 export default class EditorComponent extends Component {
   static propTypes = {
@@ -33,8 +36,25 @@ export default class EditorComponent extends Component {
     );
   }
 
+  @bind
+  focus () {
+    if (this.editor) {
+      this.editor.focus();
+    }
+  }
+
   render () {
     const {value, onChange} = this.props;
+    const hasFocus = value.getSelection().getHasFocus();
+    const contentState = value.getCurrentContent();
+
+    let className = cx(styles.editor, hasFocus && styles.focused);
+
+    if (!contentState.hasText()) {
+      if (contentState.getBlockMap().first().getType() !== 'unstyled') {
+        className = cx(className, styles.hidePlaceholder);
+      }
+    }
 
     return (
       <div>
@@ -46,12 +66,17 @@ export default class EditorComponent extends Component {
           editorState={value}
           onToggle={this.toggleInlineStyle}
         />
-        <Editor
-          editorState={value}
-          onChange={onChange}
-          placeholder='Tell a story...'
-          spellCheck
-        />
+        <Typography className={className} onClick={this.focus}>
+          <Editor
+            editorState={value}
+            onChange={onChange}
+            placeholder='Tell a story...'
+            ref={(ref) => {
+              this.editor = ref;
+            }}
+            spellCheck
+          />
+        </Typography>
       </div>
     );
   }
