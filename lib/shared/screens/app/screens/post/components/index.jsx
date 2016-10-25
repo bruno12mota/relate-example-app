@@ -1,13 +1,23 @@
 import React, {Component, PropTypes} from 'react';
 
 import Button from 'components/button';
+import DraftHtml from 'components/draft-html';
 import Editor from 'components/editor';
+import Scrollable from 'components/scrollable';
 import Typography from 'components/typography';
 import bind from 'decorators/bind';
 import cx from 'classnames';
 import styles from './index.less';
 
 export default class Post extends Component {
+  static fragments = {
+    post: {
+      _id: 1,
+      title: 1,
+      content: 1
+    }
+  };
+
   static propTypes = {
     id: PropTypes.string.isRequired,
     post: PropTypes.object,
@@ -28,7 +38,11 @@ export default class Post extends Component {
 
     return (
       <div className={cx(styles.root, isEdit && styles.editing)}>
-        {this.renderContent()}
+        <Scrollable className={styles.scrollArea}>
+          <div className={styles.content}>
+            {this.renderContent()}
+          </div>
+        </Scrollable>
         <div className={styles.footer}>
           <Button cancel margins url={isNew ? '/' : `/${id}`}>
             {isNew ? 'Cancel new' : 'Cancel edit'}
@@ -65,7 +79,7 @@ export default class Post extends Component {
       result = (
         <Typography>
           <h1>{post.title}</h1>
-          <div>{post.content}</div>
+          <DraftHtml raw={post.content} />
         </Typography>
       );
     }
