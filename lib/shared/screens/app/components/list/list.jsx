@@ -11,7 +11,8 @@ export default class List extends Component {
 
   static propTypes = {
     posts: PropTypes.array,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    currentId: PropTypes.string
   };
 
   render () {
@@ -61,8 +62,14 @@ export default class List extends Component {
   }
 
   renderEntry (post) {
+    const {currentId} = this.props;
+
     return (
-      <Entry key={post._id} post={post} />
+      <Entry
+        key={post._id}
+        post={post}
+        active={currentId === post._id}
+      />
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
+import Animate from 'components/animate';
 import Button from 'components/button';
 import DraftHtml from 'components/draft-html';
 import Editor from 'components/editor';
@@ -25,7 +26,8 @@ export default class Post extends Component {
     isEdit: PropTypes.bool,
     changeTitle: PropTypes.func.isRequired,
     changeContent: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    onRemovePost: PropTypes.func.isRequired
   };
 
   @bind
@@ -34,7 +36,7 @@ export default class Post extends Component {
   }
 
   render () {
-    const {isEdit, isNew, id, onSubmit} = this.props;
+    const {isEdit} = this.props;
 
     return (
       <div className={cx(styles.root, isEdit && styles.editing)}>
@@ -44,12 +46,7 @@ export default class Post extends Component {
           </div>
         </Scrollable>
         <div className={styles.footer}>
-          <Button cancel margins url={isNew ? '/' : `/${id}`}>
-            {isNew ? 'Cancel new' : 'Cancel edit'}
-          </Button>
-          <Button primary margins onClick={onSubmit}>
-            {isNew ? 'Create post' : 'Save post'}
-          </Button>
+          {this.renderFooterContent()}
         </div>
       </div>
     );
@@ -81,6 +78,41 @@ export default class Post extends Component {
           <h1>{post.title}</h1>
           <DraftHtml raw={post.content} />
         </Typography>
+      );
+    }
+
+    return result;
+  }
+
+  renderFooterContent () {
+    const {isEdit, isNew, id, onSubmit, onRemovePost} = this.props;
+    let result;
+
+    if (isEdit) {
+      result = (
+        <Animate key='edit'>
+          <div>
+            <Button cancel margins url={isNew ? '/' : `/${id}`}>
+              {isNew ? 'Cancel new' : 'Cancel edit'}
+            </Button>
+            <Button primary margins onClick={onSubmit}>
+              {isNew ? 'Create post' : 'Save post'}
+            </Button>
+          </div>
+        </Animate>
+      );
+    } else {
+      result = (
+        <Animate key='post'>
+          <div>
+            <Button primary margins url={`/${id}?edit=1`}>
+              Edit post
+            </Button>
+            <Button cancel margins onClick={onRemovePost}>
+              Remove Post
+            </Button>
+          </div>
+        </Animate>
       );
     }
 

@@ -2,7 +2,7 @@
 
 .root {
   display: block;
-  padding: 15px;
+  padding: 20px 15px;
   border-bottom: 1px solid @borders;
   cursor: pointer;
   border-right: 2px solid transparent;
@@ -15,6 +15,10 @@
   }
   &.active {
     border-right: 2px solid @primary;
+    
+    .date {
+      color: @textNormal;
+    }
   }
 }
 
