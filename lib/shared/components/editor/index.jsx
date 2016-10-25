@@ -1,4 +1,4 @@
-import {Editor, RichUtils} from 'draft-js';
+import {Editor, EditorState, RichUtils, convertFromRaw} from 'draft-js';
 import React, {Component, PropTypes} from 'react';
 
 import BlockStyles from './block-styles';
@@ -45,8 +45,13 @@ export default class EditorComponent extends Component {
 
   render () {
     const {value, onChange} = this.props;
-    const hasFocus = value.getSelection().getHasFocus();
-    const contentState = value.getCurrentContent();
+
+    const editorState = value instanceof EditorState ? value : EditorState.createWithContent(
+      convertFromRaw(value)
+    );
+
+    const hasFocus = editorState.getSelection().getHasFocus();
+    const contentState = editorState.getCurrentContent();
 
     let className = cx(styles.editor, hasFocus && styles.focused);
 
@@ -59,16 +64,16 @@ export default class EditorComponent extends Component {
     return (
       <div>
         <BlockStyles
-          editorState={value}
+          editorState={editorState}
           onToggle={this.toggleBlockType}
         />
         <InlineStyles
-          editorState={value}
+          editorState={editorState}
           onToggle={this.toggleInlineStyle}
         />
         <Typography className={className} onClick={this.focus}>
           <Editor
-            editorState={value}
+            editorState={editorState}
             onChange={onChange}
             placeholder='Tell a story...'
             ref={(ref) => {
