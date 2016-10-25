@@ -1,10 +1,15 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+
+import {Link} from 'react-router';
+import moment from 'moment';
+import styles from './entry.less';
 
 export default class Entry extends Component {
   static fragments = {
     post: {
       _id: 1,
-      title: 1
+      title: 1,
+      date: 1
     }
   };
 
@@ -14,11 +19,17 @@ export default class Entry extends Component {
 
   render () {
     const {post} = this.props;
+    const date = moment(post.date).fromNow();
 
     return (
-      <div>
-        <div>{post.title}</div>
-      </div>
+      <Link className={styles.root} to={`/${post._id}`}>
+        <div className={styles.title}>
+          {post.title}
+        </div>
+        <div className={styles.date}>
+          {date}
+        </div>
+      </Link>
     );
   }
 }
