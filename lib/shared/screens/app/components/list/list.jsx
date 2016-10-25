@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import Button from 'components/button';
 import Entry from './entry';
+import Scrollable from 'components/scrollable';
 import styles from './list.less';
 
 export default class List extends Component {
@@ -29,7 +30,9 @@ export default class List extends Component {
 
     return (
       <div className={styles.root}>
-        {result}
+        <Scrollable className={styles.content}>
+          {result}
+        </Scrollable>
         <div className={styles.footer}>
           <Button url='/new' primary block>
             Create new post
