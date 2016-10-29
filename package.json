@@ -50,6 +50,7 @@
     "relate-js": "^0.6.13",
     "relax-velocity-animate": "^1.0.0",
     "serialize-javascript": "^1.3.0",
+    "shallowequal": "^0.2.2",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1"
   },

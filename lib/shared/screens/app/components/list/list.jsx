@@ -13,11 +13,12 @@ export default class List extends Component {
   static propTypes = {
     posts: PropTypes.array,
     loading: PropTypes.bool.isRequired,
-    currentId: PropTypes.string
+    currentId: PropTypes.string,
+    loadMore: PropTypes.func.isRequired
   };
 
   render () {
-    const {loading, posts} = this.props;
+    const {loading, posts, loadMore} = this.props;
     let result;
 
     if (loading) {
@@ -30,7 +31,7 @@ export default class List extends Component {
 
     return (
       <div className={styles.root}>
-        <Scrollable className={styles.content}>
+        <Scrollable className={styles.content} lazyLoad loadMore={loadMore}>
           {result}
         </Scrollable>
         <div className={styles.footer}>
